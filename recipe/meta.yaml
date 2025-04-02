@@ -1,0 +1,52 @@
+{% set name = "evalidate" %}
+{% set version = "2.0.3" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 5a18e1bd7427ccde2518bad90d7bcec07308a2346822ac094e8fcf8094b8fab8
+
+build:
+  number: 0
+  skip: true  # [py<38]
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python
+    - hatchling
+    - pip
+  run:
+    - python
+
+test:
+  imports:
+    - evalidate
+  source_files:
+    - tests
+  requires:
+    - pip
+    - pytest
+  commands:
+    - pip check
+    # Skip test_mul_overflow, it crashes with an error 'run_test.sh: line 8: 11005 Killed: 9 pytest -v'
+    - pytest -v -k "not test_mul_overflow"
+
+about:
+  home: https://github.com/yaroslaff/evalidate
+  dev_url: https://github.com/yaroslaff/evalidate
+  doc_url: https://github.com/yaroslaff/evalidate
+  summary: Validation and secure evaluation of untrusted python expressions
+  description: |
+    Evalidate is simple python module for safe
+    and very fast eval()'uating user-supplied (possible malicious) python expressions.
+  license: MIT
+  license_family: MIT
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - jaimergp
