@@ -1,5 +1,5 @@
 {% set name = "evalidate" %}
-{% set version = "2.0.3" %}
+{% set version = "2.1.4" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 5a18e1bd7427ccde2518bad90d7bcec07308a2346822ac094e8fcf8094b8fab8
+  sha256: 86b574117c839e7479b04efccd07eb2ef55669bfcbb2bbb59ea1bdf6d1c7d0ab
 
 build:
   number: 0
